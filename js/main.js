@@ -20,7 +20,7 @@ class To-doManager {
     this.to-doItemFormatter = to-doItemFormatter;
   }
 
-  addTodo(task, dueDate) {
+  addTo-do(task, dueDate) {
     const newTo-do = {
       id: this.getRandomId(),
       task: this.to-doItemFormatter.formatTask(task),
