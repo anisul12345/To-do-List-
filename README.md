@@ -1,9 +1,9 @@
 # To-do list
-A website where individuals can securely keep a record of their to do list in a digital format.
+A website where individuals or groups can keep a record of their to-do list in a digital format.
 
 # Online To-do list Website
 
-A web-based personal diary application built with HTML, CSS and JavaScript. 
+A web-based application built with HTML, CSS and JavaScript. 
 
 ## Features
 
@@ -18,8 +18,8 @@ A web-based personal diary application built with HTML, CSS and JavaScript.
 
 ### Running the Application
 
-1. Create an account or log in if you already have one.
-2. Start creating your personal to do list.
+1. Start creating your to do list for yourself or your group.
+
 
 ## Built With
 
