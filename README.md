@@ -1,14 +1,15 @@
-# Online-Diary
-A website where individuals can securely keep a record of their thoughts and memories in a digital format.
-# Online Diary Website
+# To-do list
+A website where individuals can securely keep a record of their to do list in a digital format.
+
+# Online To-do list Website
 
 A web-based personal diary application built with HTML, CSS and JavaScript. 
 
 ## Features
 
-- Create a personal diary
-- Edit and delete diary entries
-- Change background with a personalized photo
+- Create a to-do list
+- Edit and delete list entries
+
 
 ### Prerequisites
 
@@ -18,7 +19,7 @@ A web-based personal diary application built with HTML, CSS and JavaScript.
 ### Running the Application
 
 1. Create an account or log in if you already have one.
-2. Start creating your personal diary.
+2. Start creating your personal to do list.
 
 ## Built With
 
