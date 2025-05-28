@@ -293,9 +293,9 @@ getThemeFromLocalStorage() {
 
 
 // Instantiating the classes
-const todoItemFormatter = new TodoItemFormatter();
-const todoManager = new TodoManager(todoItemFormatter);
-const uiManager = new UIManager(todoManager, todoItemFormatter);
+const to-doItemFormatter = new To-doItemFormatter();
+const to-doManager = new To-doManager(to-doItemFormatter);
+const uiManager = new UIManager(to-doManager, to-doItemFormatter);
 const themes = document.querySelectorAll(".theme-item");
 const html = document.querySelector("html");
 const themeSwitcher = new ThemeSwitcher(themes, html);
