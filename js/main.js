@@ -33,7 +33,7 @@ class To-doManager {
     return newTo-do;
   }
 
-  editTodo(id, updatedTask) {
+  editTo-do(id, updatedTask) {
       const to-do = this.to-dos.find((t) => t.id === id);
       if (to-do) {
         to-do.task = updatedTask;
@@ -50,7 +50,7 @@ class To-doManager {
     toggleTo-doStatus(id) {
       const to-do = this.to-dos.find((t) => t.id === id);
       if (to-do) {
-        to-do.completed = !todo.completed;
+        to-do.completed = !to-do.completed;
         this.saveToLocalStorage();
       }
     }
@@ -156,7 +156,7 @@ class UIManager {
     this.displayTo-dos(todos);
   }
 
-  displayTodos(to-dos) {
+  displayTo-dos(to-dos) {
 
       this.to-dosListBody.innerHTML = "";
       
@@ -173,17 +173,17 @@ class UIManager {
             <td>${this.to-doItemFormatter.formatStatus(to-do.completed)}</td>
             <td>
               <button class="btn btn-warning btn-sm" onclick="uiManager.handleEditTo-do('${
-                todo.id
+                to-do.id
               }')">
                 <i class="bx bx-edit-alt bx-bx-xs"></i>    
               </button>
               <button class="btn btn-success btn-sm" onclick="uiManager.handleToggleStatus('${
-                todo.id
+                to-do.id
               }')">
                 <i class="bx bx-check bx-xs"></i>
               </button>
               <button class="btn btn-error btn-sm" onclick="uiManager.handleDeleteTo-do('${
-                todo.id
+                to-do.id
               }')">
                 <i class="bx bx-trash bx-xs"></i>
               </button>
