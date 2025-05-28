@@ -1,5 +1,5 @@
 // Abstract class for TodoItemFormatter
-class TodoItemFormatter {
+class To-doItemFormatter {
   formatTask(task) {
     return task.length > 14 ? task.slice(0, 14) + "..." : task;
   }
@@ -14,62 +14,62 @@ class TodoItemFormatter {
 }
 
 // Class responsible for managing Todo items
-class TodoManager {
-  constructor(todoItemFormatter) {
-    this.todos = JSON.parse(localStorage.getItem("todos")) || [];
-    this.todoItemFormatter = todoItemFormatter;
+class To-doManager {
+  constructor(to-doItemFormatter) {
+    this.to-dos = JSON.parse(localStorage.getItem("todos")) || [];
+    this.to-doItemFormatter = to-doItemFormatter;
   }
 
   addTodo(task, dueDate) {
-    const newTodo = {
+    const newTo-do = {
       id: this.getRandomId(),
-      task: this.todoItemFormatter.formatTask(task),
-      dueDate: this.todoItemFormatter.formatDueDate(dueDate),
+      task: this.to-doItemFormatter.formatTask(task),
+      dueDate: this.to-doItemFormatter.formatDueDate(dueDate),
       completed: false,
       status: "pending",
     };
-    this.todos.push(newTodo);
+    this.to-dos.push(newTo-do);
     this.saveToLocalStorage();
-    return newTodo;
+    return newTo-do;
   }
 
   editTodo(id, updatedTask) {
-      const todo = this.todos.find((t) => t.id === id);
-      if (todo) {
-        todo.task = updatedTask;
+      const to-do = this.to-dos.find((t) => t.id === id);
+      if (to-do) {
+        to-do.task = updatedTask;
         this.saveToLocalStorage();
       }
-      return todo;
+      return to-do;
     }
   
-    deleteTodo(id) {
-      this.todos = this.todos.filter((todo) => todo.id !== id);
+    deleteTo-do(id) {
+      this.to-dos = this.to-dos.filter((to-do) => to-do.id !== id);
       this.saveToLocalStorage();
     }
   
-    toggleTodoStatus(id) {
-      const todo = this.todos.find((t) => t.id === id);
-      if (todo) {
-        todo.completed = !todo.completed;
+    toggleTo-doStatus(id) {
+      const to-do = this.to-dos.find((t) => t.id === id);
+      if (to-do) {
+        to-do.completed = !todo.completed;
         this.saveToLocalStorage();
       }
     }
   
-    clearAllTodos() {
-      if (this.todos.length > 0) {
-        this.todos = [];
+    clearAllTo-dos() {
+      if (this.to-dos.length > 0) {
+        this.to-dos = [];
         this.saveToLocalStorage();
       }
     }
   
-    filterTodos(status) {
+    filterTo-dos(status) {
       switch (status) {
         case "all":
-          return this.todos;
+          return this.to-dos;
         case "pending":
-          return this.todos.filter((todo) => !todo.completed);
+          return this.to-dos.filter((to-do) => !to-do.completed);
         case "completed":
-          return this.todos.filter((todo) => todo.completed);
+          return this.to-dos.filter((to-do) => to-do.completed);
         default:
           return [];
       }
@@ -83,36 +83,36 @@ class TodoManager {
     }
   
     saveToLocalStorage() {
-      localStorage.setItem("todos", JSON.stringify(this.todos));
+      localStorage.setItem("to-dos", JSON.stringify(this.to-dos));
     }
 }
 
 // Class responsible for managing the UI and handling events
 class UIManager {
-  constructor(todoManager, todoItemFormatter) {
-    this.todoManager = todoManager;
-    this.todoItemFormatter = todoItemFormatter;
+  constructor(to-doManager, to-doItemFormatter) {
+    this.to-doManager = to-doManager;
+    this.to-doItemFormatter = to-doItemFormatter;
     this.taskInput = document.querySelector("input");
     this.dateInput = document.querySelector(".schedule-date");
     this.addBtn = document.querySelector(".add-task-button");
-    this.todosListBody = document.querySelector(".todos-list-body");
+    this.to-dosListBody = document.querySelector(".to-dos-list-body");
     this.alertMessage = document.querySelector(".alert-message");
     this.deleteAllBtn = document.querySelector(".delete-all-btn");
 
   this.addEventListeners();
-  this.showAllTodos();
+  this.showAllTo-dos();
   }
 
   addEventListeners() {
       // Event listener for adding a new todo
       this.addBtn.addEventListener("click", () => {
-          this.handleAddTodo();
+          this.handleAddTo-do();
       });
 
       // Event listener for pressing Enter key in the task input
       this.taskInput.addEventListener("keyup", (e) => {
           if (e.keyCode === 13 && this.taskInput.value.length > 0) {
-              this.handleAddTodo();
+              this.handleAddTo-do();
           }
       });
 
@@ -122,7 +122,7 @@ class UIManager {
       });
 
       // Event listeners for filter buttons
-      const filterButtons = document.querySelectorAll(".todos-filter li");
+      const filterButtons = document.querySelectorAll(".to-dos-filter li");
       filterButtons.forEach((button) => {
           button.addEventListener("click", () => {
               const status = button.textContent.toLowerCase();
@@ -131,13 +131,13 @@ class UIManager {
       });
   }
 
-  handleAddTodo() {
+  handleAddTo-do() {
     const task = this.taskInput.value;
     const dueDate = this.dateInput.value;
     if (task === "") {
       this.showAlertMessage("Please enter a task", "error");
     } else {
-      const newTodo = this.todoManager.addTodo(task, dueDate);
+      const newTo-do = this.to-doManager.addTo-do(task, dueDate);
       this.showAllTodos();
       this.taskInput.value = "";
       this.dateInput.value = "";
@@ -145,34 +145,34 @@ class UIManager {
     }
   }
 
-  handleClearAllTodos() {
-    this.todoManager.clearAllTodos();
-    this.showAllTodos();
-    this.showAlertMessage("All todos cleared successfully", "success");
+  handleClearAllTo-dos() {
+    this.todoManager.clearAllTo-dos();
+    this.showAllTo-dos();
+    this.showAlertMessage("All to-dos cleared successfully", "success");
   }
 
-  showAllTodos() {
-    const todos = this.todoManager.filterTodos("all");
-    this.displayTodos(todos);
+  showAllTo-dos() {
+    const to-dos = this.to-doManager.filterTo-dos("all");
+    this.displayTo-dos(todos);
   }
 
-  displayTodos(todos) {
+  displayTodos(to-dos) {
 
-      this.todosListBody.innerHTML = "";
+      this.to-dosListBody.innerHTML = "";
       
-      if (todos.length === 0) {
-          this.todosListBody.innerHTML = `<tr><td colspan="5" class="text-center">No task found</td></tr>`;
+      if (to-dos.length === 0) {
+          this.to-dosListBody.innerHTML = `<tr><td colspan="5" class="text-center">No task found</td></tr>`;
           return;
         }
         
-      todos.forEach((todo) => {
-        this.todosListBody.innerHTML += `
-          <tr class="todo-item" data-id="${todo.id}">
-            <td>${this.todoItemFormatter.formatTask(todo.task)}</td>
-            <td>${this.todoItemFormatter.formatDueDate(todo.dueDate)}</td>
-            <td>${this.todoItemFormatter.formatStatus(todo.completed)}</td>
+      to-dos.forEach((to-do) => {
+        this.to-dosListBody.innerHTML += `
+          <tr class="to-do-item" data-id="${to-do.id}">
+            <td>${this.to-doItemFormatter.formatTask(to-do.task)}</td>
+            <td>${this.to-doItemFormatter.formatDueDate(to-do.dueDate)}</td>
+            <td>${this.to-doItemFormatter.formatStatus(to-do.completed)}</td>
             <td>
-              <button class="btn btn-warning btn-sm" onclick="uiManager.handleEditTodo('${
+              <button class="btn btn-warning btn-sm" onclick="uiManager.handleEditTo-do('${
                 todo.id
               }')">
                 <i class="bx bx-edit-alt bx-bx-xs"></i>    
@@ -182,7 +182,7 @@ class UIManager {
               }')">
                 <i class="bx bx-check bx-xs"></i>
               </button>
-              <button class="btn btn-error btn-sm" onclick="uiManager.handleDeleteTodo('${
+              <button class="btn btn-error btn-sm" onclick="uiManager.handleDeleteTo-do('${
                 todo.id
               }')">
                 <i class="bx bx-trash bx-xs"></i>
@@ -195,16 +195,16 @@ class UIManager {
     
 
   
-handleEditTodo(id) {
-  const todo = this.todoManager.todos.find((t) => t.id === id);
-  if (todo) {
-    this.taskInput.value = todo.task;
-    this.todoManager.deleteTodo(id);
+handleEditTo-do(id) {
+  const to-do = this.to-doManager.to-dos.find((t) => t.id === id);
+  if (to-do) {
+    this.taskInput.value = to-do.task;
+    this.to-doManager.deleteTo-do(id);
 
     const handleUpdate = () => {
       this.addBtn.innerHTML = "<i class='bx bx-plus bx-sm'></i>";
-      this.showAlertMessage("Todo updated successfully", "success");
-      this.showAllTodos();
+      this.showAlertMessage("To-do updated successfully", "success");
+      this.showAllTo-dos();
       this.addBtn.removeEventListener("click", handleUpdate);
     };
 
@@ -215,20 +215,20 @@ handleEditTodo(id) {
 
 
 handleToggleStatus(id) {
-this.todoManager.toggleTodoStatus(id);
-this.showAllTodos();
+this.to-doManager.toggleTo-doStatus(id);
+this.showAllTo-dos();
 }
 
-handleDeleteTodo(id) {
-this.todoManager.deleteTodo(id);
-this.showAlertMessage("Todo deleted successfully", "success");
-this.showAllTodos();
+handleDeleteTo-do(id) {
+this.to-doManager.deleteTo-do(id);
+this.showAlertMessage("To-do deleted successfully", "success");
+this.showAllTo-dos();
 }
 
 
-handleFilterTodos(status) {
-  const filteredTodos = this.todoManager.filterTodos(status);
-  this.displayTodos(filteredTodos);
+handleFilterTo-dos(status) {
+  const filteredTo-dos = this.to-doManager.filterTo-dos(status);
+  this.displayTo-dos(filteredTo-dos);
 }
 
 
